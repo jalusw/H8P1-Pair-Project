@@ -54,12 +54,9 @@ npm run start:debug # with debugging
 
 
 ## Folder Structure
-<<<<<<< HEAD
 Proyek ini menggunakan pola arsitektur MVC dengan struktur folder sebagai
 berikut :
-=======
 
->>>>>>> c40da04a713cd6f1d9942597e58e6f9be9495474
 ```
 controllers     -> controllers related (business logic)
 routers         -> application routes 
