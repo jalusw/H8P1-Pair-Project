@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../partials/meta.ejs") %>
+    <title><%= title %></title>
+    <style>
+      .container {
+        max-width: 560px;
+        padding: 5rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="border p-5 rounded">
+          <h1 class="fw-bold">Sign In</h1>
+          <p class="text-secondary">Please sign in to continue.</p>
+          <form class="mt-4" method="POST">
+            <div class="mb-3">
+              <label class="form-label fw-bold" for="email"
+                >Email address</label
+              >
+              <input
+                class="form-control"
+                type="email"
+                id="email"
+                aria-describedby="emailHelp"
+                name="email"
+                placeholder="example@example.com"
+                value="<%= data.email %>"
+              />
+              <% if(errors.email) { %> 
+                <p class="text-danger">
+                  <%= errors.email?.message %>
+                </p>
+              <% } %>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold" for="password">Password</label>
+              <input
+                class="form-control"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="**********"
+                value="<%= data.password %>"
+              />
+              <% if(errors.password) { %> 
+                <p class="text-danger">
+                  <%= errors.password?.message %>
+                </p>
+              <% } %>
+            </div>
+            <button class="btn btn-primary mt-3" type="submit">Sign</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <%- include("../partials/scripts.ejs") %>
+  </body>
+</html>
