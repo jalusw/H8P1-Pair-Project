@@ -1,8 +1,8 @@
 const {} = require("../models");
 
 class HomeController {
-  static index(req, res, next) {
-    res.render("index", { title: "Home" });
+  static index(_, res) {
+    res.render("pages/index", { title: "Home" });
   }
 }
 
