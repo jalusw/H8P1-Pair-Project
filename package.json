@@ -8,7 +8,8 @@
     "start:debug": "node --inspect ./bin/www",
     "db:init": "sequelize-cli db:create",
     "db:migrate": "sequelize-cli db:migrate",
-    "db:seed": "sequelize-cli db:seed:all"
+    "db:seed": "sequelize-cli db:seed:all",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,7 +24,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.4.5",
-    "prettier": "^3.3.3",
+    "prettier": "3.3.3",
     "sequelize-cli": "^6.6.2"
   }
 }
