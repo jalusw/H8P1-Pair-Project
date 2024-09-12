@@ -26,9 +26,57 @@
       <%- include("../layouts/sidebar-admin.ejs") %>
       <main>
         <h1>Daftar Produk</h1>
+
+        <a href="/admin/products/add">Add Product</a>
+
+        <style>
+          table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+          }
+          
+          tr:nth-child(even) {
+            background-color: #dddddd;
+          }
+          </style>
+          </head>
+          <body>
+          
+          
+          <table>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Stock</th>
+              <th>Price</th>
+              <th>description</th>
+              <th>Category</th>
+            </tr>
+            <tr>
+              <% data.forEach((e)=> { %>
+                <tr>
+                  <td><%= e.image %></td>
+                  <td><%= e.name %></td>
+                  <td><%= e.stock %></td>
+                  <td><%= e.price %></td>
+                  <td><%= e.description %></td>
+                  <td><%= e.CategoryId %></td>
+                </tr>
+              <%}) %>
+            </tr>
       </main>
     </div>
+    
 
     <%- include("../partials/scripts.ejs") %>
+
+    
   </body>
 </html>

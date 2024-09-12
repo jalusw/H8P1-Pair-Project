@@ -20,4 +20,10 @@ router.get(
   ProductController.index,
 );
 
+router.get(
+  "/products/add",
+  AuthenticationMiddleware.auth,
+  AuthenticationMiddleware.admin,
+  ProductController.index,
+)
 module.exports = router;

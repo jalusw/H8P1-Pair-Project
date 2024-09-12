@@ -1,11 +1,12 @@
 const { ErrorPageHelper } = require("../helpers");
-const {} = require("../models");
+const { Product, Category } = require("../models");
 
 class ProductController {
   static async index(req, res, next) {
     try {
       // do something ...
-      return res.render("pages/products");
+      const data = await Product.findAll()
+      return res.render("pages/products", {data});
     } catch (error) {
       switch (error.name) {
         default:
@@ -15,4 +16,19 @@ class ProductController {
   }
 }
 
-module.exports = ProductController;
+class ProductAdd {
+  static async index(req, res, next) {
+    try {
+      // do something ...
+      const data = await Product.findAll()
+      return res.render("pages/products", {data});
+    } catch (error) {
+      switch (error.name) {
+        default:
+          return ErrorPageHelper.internalServerError(error, res);
+      }
+    }
+  }
+}
+
+module.exports = {ProductController, ProductAdd};
