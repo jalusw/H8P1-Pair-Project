@@ -85,7 +85,7 @@ berikut :
 ```
 controllers     -> controllers related (business logic)
 routers         -> application routes
-models          -> database models 
+models          -> database models
 migrations      -> database table migrations
 seeders         -> database data seeders
 views           -> view pages (user interface)

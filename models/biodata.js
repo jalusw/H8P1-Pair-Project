@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User);
     }
 
-    get birthDateInputFormatted(){
+    get birthDateInputFormatted() {
       const { DateHelper } = require("../helpers");
-      if(!this.birthDate)  return null;
+      if (!this.birthDate) return null;
       return DateHelper.formatDateInputValue(this.birthDate);
     }
   }
@@ -24,14 +24,14 @@ module.exports = (sequelize, DataTypes) => {
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       gender: DataTypes.STRING,
-      birthDate: { 
+      birthDate: {
         type: DataTypes.DATE,
         validate: {
           isBefore: {
             args: "2007-01-01",
-            msg: "Too young !"
-          }
-        }
+            msg: "Too young !",
+          },
+        },
       },
       address: DataTypes.STRING,
       UserId: DataTypes.INTEGER,

@@ -3,9 +3,7 @@ const multer = require("multer");
 const slugify = require("slugify");
 
 const storage = multer.diskStorage({
-  destination: path.resolve(
-    path.join(__dirname, "..", "public/uploads"),
-  ),
+  destination: path.resolve(path.join(__dirname, "..", "public/uploads")),
   filename: (_, file, cb) => {
     const name = slugify(file.originalname, { lower: true });
     cb(null, `${new Date().getTime()}-${name}`);

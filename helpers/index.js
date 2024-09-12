@@ -1,5 +1,6 @@
 const AuthenticationHelper = require("./AuthenticationHelper");
 const AvatarHelper = require("./AvatarHelper");
+const CurrencyHelper = require("./CurrencyHelper");
 const DateHelper = require("./DateHelper");
 const ErrorPageHelper = require("./ErrorPageHelper");
 const HashHelper = require("./HashHelper");
@@ -13,5 +14,6 @@ module.exports = {
   ErrorPageHelper,
   AvatarHelper,
   DateHelper,
-  StorageHelper
+  StorageHelper,
+  CurrencyHelper
 };

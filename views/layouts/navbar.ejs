@@ -1,70 +1,66 @@
-<nav class="navbar navbar-expand-lg sticky-top bg-white py-3 border " id="navbar">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="/"><%= appName %></a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <nav class="navbar navbar-expand-lg sticky-top bg-white py-3 border " id="navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/"><%= appName %></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <li class="nav-item"></li>
-          <a class="nav-link"  href="/products">Products</a>
-        </li>
-        <div class="mx-2"></div>
- 
-        <div class="mx-2"></div>
-          </ul>
-      <div class="d-flex">
-        <% if(user) { %>
-        <div class="dropdown">
-          <button class="btn btn-ghost flex align-items-center m-0 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="rounded-circle d-none d-lg-inline-block" src="<%= user.Biodatum?.image %>" width="40" height="40" alt="" srcset="">
-            <p class="d-inline-block d-lg-none p-0 m-0"><%= user.email %></p>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
-            <li class="dropdown-item d-flex align-items-center">
-              <i class="bi bi-person"></i>
-              <a class="dropdown-item" href="/profile">Profile</a>
-            </li>
-            <% if(user.isAdmin) { %>
+          <li class="nav-item"></li>
+            <a class="nav-link"  href="/catalogue">Catalogue</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <% if(user) { %>
+          <div class="dropdown">
+            <button class="btn btn-ghost flex align-items-center m-0 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img class="rounded-circle d-none d-lg-inline-block" src="<%= user.Biodatum?.image %>" width="40" height="40" alt="" srcset="">
+              <p class="d-inline-block d-lg-none p-0 m-0"><%= user.email %></p>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-start dropdown-menu-lg-end">
               <li class="dropdown-item d-flex align-items-center">
-                <i class="bi bi-speedometer2"></i>
-                <div class="mx-2"></div>
-                <a class="nav-link" href="/admin/">Dashboard</a>
+                <i class="bi bi-person"></i>
+                <a class="dropdown-item" href="/profile">Profile</a>
               </li>
-            <% } %>
-            <li class="dropdown-item d-flex align-items-center" >
-              <i class="bi bi-clock-history"></i>
-              <div class="mx-2"></div>
-              <a class="nav-link" href="/orders">Order</a>
-            </li>
-            <li class="dropdown-item d-flex align-items-center">
-              <i class="bi bi-cart"></i>
-              <div class="mx-2"></div>
-              <a class="nav-link"  href="/carts">Cart</a>
-            </li>
-            <li class="dropdown-item">
-              <form class="d-flex align-items-center" action="/logout" method="POST">
-                <i class="bi bi-door-open"></i>
+              <% if(user.isAdmin) { %>
+                <li class="dropdown-item d-flex align-items-center">
+                  <i class="bi bi-speedometer2"></i>
+                  <div class="mx-2"></div>
+                  <a class="nav-link" href="/admin/">Dashboard</a>
+                </li>
+              <% } %>
+              <li class="dropdown-item d-flex align-items-center" >
+                <i class="bi bi-clock-history"></i>
                 <div class="mx-2"></div>
-                <button class="dropdown-item m-0 p-0" type="submit">Logout</button>
-              </form>
-            </li>
-          </ul>
+                <a class="nav-link" href="/orders">Order</a>
+              </li>
+              <li class="dropdown-item d-flex align-items-center">
+                <i class="bi bi-cart"></i>
+                <div class="mx-2"></div>
+                <a class="nav-link"  href="/cart">Cart</a>
+              </li>
+              <li class="dropdown-item">
+                <form class="d-flex align-items-center" action="/logout" method="POST">
+                  <i class="bi bi-door-open"></i>
+                  <div class="mx-2"></div>
+                  <button class="dropdown-item m-0 p-0" type="submit">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <% } else { %>
+            <a class="btn btn-primary" href="/login">Login</a>
+          <% }  %>
         </div>
-        <% } else { %>
-          <a class="btn btn-primary" href="/login">Login</a>
-        <% }  %>
       </div>
     </div>
-  </div>
-</nav>
-
+  </nav>

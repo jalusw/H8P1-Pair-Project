@@ -6,5 +6,9 @@ class ValidationErrorHelper {
     });
     return result;
   }
+
+  static firstError(sequelizeErrors){
+    return sequelizeErrors.shift();
+  }
 }
 module.exports = ValidationErrorHelper;

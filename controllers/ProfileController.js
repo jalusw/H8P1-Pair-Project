@@ -1,4 +1,9 @@
-const { ErrorPageHelper, DateHelper, StorageHelper, ValidationErrorHelper } = require("../helpers");
+const {
+  ErrorPageHelper,
+  DateHelper,
+  StorageHelper,
+  ValidationErrorHelper,
+} = require("../helpers");
 const { Biodata } = require("../models");
 
 class ProfileController {
@@ -15,20 +20,17 @@ class ProfileController {
 
   static async update(req, res) {
     try {
-      const  user = res.locals?.user;
-      const UserId  = user.id;
+      const user = res.locals?.user;
+      const UserId = user.id;
 
-      const {
-        file,
-        body,
-      } = req;
+      const { file, body } = req;
 
-      let image =  user.Biodatum?.image;
-      if(file?.filename){
+      let image = user.Biodatum?.image;
+      if (file?.filename) {
         image = StorageHelper.generateUploadPath(file.filename);
       }
 
-      if(!body?.birthDate){
+      if (!body?.birthDate) {
         body.birthDate = null;
       }
 
@@ -44,7 +46,7 @@ class ProfileController {
         },
       );
 
-      req.flash('success', 'Your profile has been updated successfully');
+      req.flash("success", "Your profile has been updated successfully");
 
       return res.redirect("back");
     } catch (error) {

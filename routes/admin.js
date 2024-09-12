@@ -24,6 +24,7 @@ router.get(
   "/products/add",
   AuthenticationMiddleware.auth,
   AuthenticationMiddleware.admin,
-  ProductController.index,
-)
+  ProductController.addProduct,
+);
+
 module.exports = router;
