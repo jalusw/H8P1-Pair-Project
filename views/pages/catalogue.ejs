@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../partials/meta.ejs") %>
+    <title><%= title %></title>
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+    <%- include("../layouts/navbar.ejs") %>
+    <%- include("../layouts/search-bar.ejs") %>
+    <div class="container">
+      <div class="row mt-5 gx-5 ">
+        <div class="col-sm-12 col-md-3 mb-5">
+          <form action="">
+            <div class="">
+              <label class="fw-bold" for="">Category</label>
+              <select class="form-select" name="category" id="price">
+                <option value="">Choose Category</option>
+                <% categories.forEach(category => { %>
+                  <option value="<%= category.id %>" <%= query.category == category.id ? "selected" : "" %>><%= category.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="my-4">
+              <strong>Price</strong>
+              <div class="my-2">
+                <label for="">Minimum</label>
+                <input class="form-control" type="number" placeholder="0" name="minimum" value="<%= query.minimum %>" >
+              </div>
+              <div class="my-2">
+                <label for="">Maximum</label>
+                <input class="form-control" type="number" name="maximum" value="<%= query.maximum %>" placeholder="1000000000">
+              </div>
+            </div>
+            <div class="my-4">
+              <strong></strong>
+            </div>
+            <button class="btn btn-primary  col-12">Apply</button>
+          </form>
+        </div>
+        <div class="col-sm-12 col-md-9 ">
+          <div class="row g-3 ">
+            <% products.forEach(product => { %>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <a class="text-decoration-none" href="/catalogue/<%= product.id %>">
+                  <article class="card">
+                    <div class="card-body">
+                      <img src="<%= product.image %>" loading="lazy" class="card-img-top bg-secondary" alt="" style="object-fit: cover;" height="150">
+                      <h2 class="line-clamp-1 text-sm h6 mt-3"><%= product.name %></h2>
+                      <strong><%= product.priceInRupiah %></strong>
+                    </div>
+                  </article>
+                </a>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include("../partials/scripts.ejs") %> <%-
+    include("../layouts/footer.ejs") %>
+  </body>
+</html>

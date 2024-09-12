@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.User);
     }
+
+    get birthDateInputFormatted() {
+      const { DateHelper } = require("../helpers");
+      if (!this.birthDate) return null;
+      return DateHelper.formatDateInputValue(this.birthDate);
+    }
   }
   Biodata.init(
     {
@@ -18,7 +24,15 @@ module.exports = (sequelize, DataTypes) => {
       firstName: DataTypes.STRING,
       lastName: DataTypes.STRING,
       gender: DataTypes.STRING,
-      birthDate: DataTypes.DATE,
+      birthDate: {
+        type: DataTypes.DATE,
+        validate: {
+          isBefore: {
+            args: "2007-01-01",
+            msg: "Too young !",
+          },
+        },
+      },
       address: DataTypes.STRING,
       UserId: DataTypes.INTEGER,
     },

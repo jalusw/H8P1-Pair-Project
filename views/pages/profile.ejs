@@ -34,7 +34,7 @@
                 <img
                   class="rounded-circle profile-image"
                   id="image-preview"
-                  src="<%= user.Biodatum.image %>"
+                  src="<%= user.Biodatum?.image %>"
                   alt=""
                   width="150"
                   height="150"
@@ -53,6 +53,7 @@
                   type="text"
                   name="firstName"
                   placeholder="John"
+                  value="<%= user.Biodatum?.firstName %>"
                 />
               </div>
               <div class="col-sm-12 col-md-6 my-2">
@@ -63,17 +64,16 @@
                   type="text"
                   name="lastName"
                   placeholder="Doe"
+                  value="<%= user.Biodatum?.lastName %>"
                 />
               </div>
               <div class="col-sm-12 col-md-6 my-2">
-                <label for="age">Age</label>
-                <input
-                  class="form-control"
-                  id="age"
-                  type="number"
-                  name="age"
-                  placeholder="20"
-                />
+                <label for="gender">Gender</label>
+                <select class="form-select" name="gender" id="gender">
+                  <option value="">Choose Gender</option>
+                  <option value="Male" <%= user.Biodatum?.gender == 'Male' ? 'selected' : '' %> >Male</option>
+                  <option  value="Female" <%= user.Biodatum?.gender == 'Female' ? 'selected' : '' %>>Female</option>
+                </select>
               </div>
               <div class="col-sm-12 col-md-6 my-2">
                 <label for="birthDate">Birth Date</label>
@@ -82,7 +82,13 @@
                   id="birthDate"
                   type="date"
                   name="birthDate"
+                  value="<%= user.Biodatum?.birthDateInputFormatted %>"
                 />
+                <% if(errors.birthDate) { %> 
+                  <p class="text-danger">
+                    <%= errors.birthDate?.message %>
+                  </p>
+                <% } %>
               </div>
               <div class="col-12 my-2">
                 <label for="address">Address</label>
@@ -91,7 +97,7 @@
                   name="address"
                   id="address"
                   placeholder="123 Main St, Springfield, IL 62704"
-                ></textarea>
+                ><%= user.Biodatum?.address %></textarea>
               </div>
             </div>
               <button class="btn btn-primary d-flex mt-5">
@@ -104,7 +110,10 @@
       </div>
     </main>
 
+    <%- include("../layouts/footer.ejs") %>
     <%- include("../partials/scripts.ejs") %>
+    <%- include("../partials/sweet-alert.ejs") %>
+
     <script>
       const imageControl = document.getElementById("image-control");
       const imagePreview = document.getElementById("image-preview");

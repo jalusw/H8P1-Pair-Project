@@ -61,4 +61,5 @@ router.get(
   AuthenticationMiddleware.admin,
   ProductController.restockProduct,
 )
+
 module.exports = router;

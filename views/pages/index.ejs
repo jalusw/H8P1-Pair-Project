@@ -14,18 +14,26 @@
 
   <body>
     <%- include("../layouts/navbar.ejs") %>
+    <%- include("../layouts/search-bar.ejs") %>
     <header class="header">
-      <div class="p-5 text-center rounded-3">
+      <div class="py-5 rounded-3">
         <div class="container">
-          <h1 class="text-body-emphasis">Jumbotron with icon</h1>
-          <p class="col-lg-8 mx-auto fs-5 text-muted">
-            This is a custom jumbotron featuring an SVG image at the top, some
-            longer text that wraps early thanks to a responsive
-            <code>.col-*</code> class, and a customized call to action.
-          </p>
+          <div class="row align-items-center">
+            <div class="col-lg-5"> 
+                <h1 class="text-body-emphasis text-xxl">Welcome To Toko Biru</h1>
+                <p class="col-lg-12 text-muted">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, obcaecati at. Perferendis dignissimos tempora veniam doloremque aperiam delectus.
+                </p>
+                <a class="btn btn-primary mt-3" href="/catalogue">Start Shopping !</a>
+            </div>
+            <div class="col-lg-6">
+              <img src="/svgs/shopping-bag.svg" alt="" srcset="">
+            </div>
+          </div>
         </div>
       </div>
     </header>
+
     <main></main>
     <%- include("../layouts/footer.ejs") %>
     <%- include("../partials/scripts.ejs") %>

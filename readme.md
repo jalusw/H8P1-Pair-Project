@@ -25,6 +25,12 @@ Navigate to the directory
 cd H8P1-Pair-Project
 ```
 
+set up the env
+
+```
+mv .env.example .env
+```
+
 Install dependencies
 
 ```bash
@@ -79,7 +85,7 @@ berikut :
 ```
 controllers     -> controllers related (business logic)
 routers         -> application routes
-models          -> database models 
+models          -> database models
 migrations      -> database table migrations
 seeders         -> database data seeders
 views           -> view pages (user interface)

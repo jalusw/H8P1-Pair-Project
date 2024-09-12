@@ -11,6 +11,19 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasOne(models.Biodata);
+      this.belongsToMany(models.Product, {through: models.Order});
+    }
+
+    static async withShoppingCart(id){
+      return await this.findByPk(id, {
+        include : {
+          model: sequelize.models.Product,
+          through: {
+            attributes: ['quantity','note','address']
+          }
+        },
+
+      });
     }
 
     get isAdmin() {
@@ -80,11 +93,12 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       hooks: {
         beforeCreate(instance, _) {
-          const { HashHelper, AvatarHelper } = require("../helpers");
+          const { HashHelper } = require("../helpers");
           instance.password = HashHelper.generate(instance.dataValues.password);
           instance.role = "General";
         },
         afterCreate(instance, _) {
+          const { AvatarHelper } = require("../helpers");
           sequelize.models.Biodata.create({
             image: AvatarHelper.generate(instance.email.split("@")[0]),
             UserId: instance.id,

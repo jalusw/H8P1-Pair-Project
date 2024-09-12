@@ -23,6 +23,7 @@ class ProductController {
       let data = await Product.findAll({
         include: Category
       })
+
       // res.send(data);
       return res.render("pages/addProduct", {data});
     } catch (error) {
