@@ -8,7 +8,9 @@
   </head>
 
   <body>
-    <%- include("../layouts/navbar.ejs") %>
+
+    <%- include("../layouts/navbarAdmin.ejs") %>
+
 
 
     <h2>Add New Product</h2>
@@ -20,12 +22,16 @@
       <label for="">Stock</label><br>
       <input type="text" name="stock"><br><br>
       <label for="">Prices</label><br>
-      <input type="text" name="prices"><br><br>
+      <input type="text" name="price"><br><br>
       <label for="">Description</label><br>
       <input type="text" name="description"><br><br>
-      <label for="">Category</label><br>
-      <input type="text" name="CategoryId"><br><br>
-
+      <select name="CategoryId" id="">
+        <option value="1">Food</option>
+        <option value="2">Clothing</option>
+        <option value="3">Electronic</option>
+        <option value="4">Other</option>
+    </select><br><br>
+      <button>ADD</button><br><br>
     </form>
     <%- include("../partials/scripts.ejs") %>
     <%- include("../layouts/footer.ejs") %>
