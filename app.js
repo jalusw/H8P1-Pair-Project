@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
 const { AuthenticationMiddleware } = require("./middlewares");
 
 const app = express();
@@ -43,6 +44,7 @@ app.use(
 app.use("/", AuthenticationMiddleware.session);
 app.use("/", indexRouter);
 app.use("/", authRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

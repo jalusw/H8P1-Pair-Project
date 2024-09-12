@@ -1,0 +1,54 @@
+<div
+  class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
+  style="width: 300px; height: 100vh"
+>
+  <a
+    href="/admin/dashboard"
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+  >
+    <svg class="bi pe-none me-2" width="40" height="32">
+      <use xlink:href="#bootstrap" />
+    </svg>
+    <span class="fs-4"><%= appName %></span>
+  </a>
+  <hr />
+  <!-- Menu navigasi -->
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="d-flex align-items-center">
+      <i class="bi bi-speedometer2"></i>
+      <a href="/admin" class="nav-link text-white"> Dashboard </a>
+    </li>
+    <li class="d-flex align-items-center">
+      <i class="bi bi-box-seam-fill"></i>
+      <a href="/admin/products" class="nav-link text-white"> Products </a>
+    </li>
+    
+  </ul>
+  <hr />
+  <div class="dropdown">
+    <a
+      href="#"
+      class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <img
+        src="<%= user.Biodatum.image %>"
+        alt=""
+        width="32"
+        height="32"
+        class="rounded-circle me-2"
+      />
+      <strong><%= user.Biodatum.firstName %></strong>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+      <li><a class="dropdown-item" href="/profile">Profile</a></li>
+      <li><hr class="dropdown-divider" /></li>
+      <li>
+        <form action="/logout" method="POST">
+          <button class="dropdown-item" href="/logout">Sign out</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</div>
