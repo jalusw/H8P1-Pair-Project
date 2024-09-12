@@ -43,9 +43,7 @@
             padding: 8px;
           }
           
-          tr:nth-child(even) {
-            background-color: #dddddd;
-          }
+          
           </style>
           </head>
           <body>
@@ -54,21 +52,27 @@
           <table>
             <tr>
               <th>Image</th>
-              <th>Name</th>
+              <th>Product Name</th>
               <th>Stock</th>
               <th>Price</th>
-              <th>description</th>
+              <th>Description</th>
               <th>Category</th>
+              <th>Action</th>
             </tr>
             <tr>
               <% data.forEach((e)=> { %>
                 <tr>
-                  <td><%= e.image %></td>
+                  <td><img src="<%= e.image %>" alt=""></td>
                   <td><%= e.name %></td>
                   <td><%= e.stock %></td>
                   <td><%= e.price %></td>
                   <td><%= e.description %></td>
                   <td><%= e.CategoryId %></td>
+                  <td>
+                    <a href="/products/<%= e.id %>/edit"><button>Edit</button></a>&nbsp;
+                    <a href="/products/<%= e.id %>/delete"><button>Delete</button></a>&nbsp;
+                    <a href="/products/<%= e.id %>/restock"><button>+</button></a>
+                </td>
                 </tr>
               <%}) %>
             </tr>
