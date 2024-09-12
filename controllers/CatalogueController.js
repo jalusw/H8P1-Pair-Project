@@ -31,6 +31,7 @@ class CatalogueController {
         limit: 20,
         order: [["createdAt", "DESC"]],
       });
+
       const categories = await Category.findAll();
       return res.render("pages/catalogue", { categories, products, query });
     } catch (error) {
@@ -46,9 +47,9 @@ class CatalogueController {
       const { params } = req;
       const { id } = params;
       const product = await Product.findByPk(id, {
-        include: Category
+        include: Category,
       });
-      return res.render("pages/product", {product});
+      return res.render("pages/product", { product });
     } catch (error) {
       switch (error.name) {
         default:
@@ -56,7 +57,6 @@ class CatalogueController {
       }
     }
   }
-
 }
 
 module.exports = CatalogueController;
