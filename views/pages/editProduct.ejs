@@ -4,35 +4,84 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include("../partials/meta.ejs") %>
-    <title>Add Product</title>
+    <title>Edit Product</title>
+    <style>
+      .admin-layout {
+        display: flex;
+      }
+
+      main {
+        padding: 2rem;
+        flex: 1;
+      }
+    </style>
   </head>
 
   <body>
     <%- include("../layouts/navbarAdmin.ejs") %>
-
-
-    <h2>Edit Product</h2>
-    <form action="/products/<%= id %>/edit" method="post">
-      <label for="">Image</label><br>
-      <input type="text" value="<%= data.image%>" name="image"><br><br>
-      <label for="">Product Name</label><br>
-      <input type="text" value="<%= data.name%>" name="name"><br><br>
-      <label for="">Stock</label><br>
-      <input type="text" value="<%= data.stock%>" name="stock"><br><br>
-      <label for="">Prices</label><br>
-      <input type="text" value="<%= data.price%>" name="price"><br><br>
-      <label for="">Description</label><br>
-      <input type="text" value="<%= data.description%>" name="description"><br><br>
-      <select name="CategoryId" id="">
-        <option value="1" <%= data.CategoryId == '1' ? 'selected' : '' %>>Food</option>
-        <option value="2" <%= data.CategoryId == 'S1' ? 'selected' : '' %>>Clothing</option>
-        <option value="3" <%= data.CategoryId == 'S2' ? 'selected' : '' %>>Electronic</option>
-        <option value="4" <%= data.CategoryId == 'S3' ? 'selected' : '' %>>Other</option>
-    </select><br><br>
-      <button>ADD</button><br><br>
-    </form>
+    <div class="admin-layout">
+      <%- include("../layouts/sidebar-admin.ejs") %>
+      <main>
+        <div class="container">
+          <h1 class="fw-bold">Edit Product</h1>
+          <form method="POST" enctype="multipart/form-data">
+            <div class="my-3">
+              <label for="">Image</label>
+              <input class="form-control" type="file" name="image" />
+            </div>
+            <div class="my-3">
+              <label for="">Product Name</label>
+              <input
+                class="form-control"
+                type="text"
+                name="name"
+                placeholder="Box"
+                value="<%= product.name %>"
+              />
+            </div>
+            <div class="my-3">
+              <label for="">Stock</label>
+              <input
+                class="form-control"
+                type="text"
+                name="stock"
+                placeholder="0"
+                value="<%= product.stock %>"
+              />
+            </div>
+            <div class="my-3">
+              <label for="">Price</label>
+              <input
+                class="form-control"
+                type="number"
+                name="price"
+                placeholder="100000"
+                value="<%= product.price %>"
+              />
+            </div>
+            <div class="my-3">
+              <label for="">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                placeholder="..."
+              ><%= product.description %></textarea>
+            </div>
+            <div class="my-3">
+              <label for="">Category</label>
+              <select class="form-control" name="CategoryId" id="">
+                <option value="">Choose Category</option>
+                <% categories.forEach(category => { %>
+                  <option <%= category.id == product.CategoryId ? "selected" : "" %> value="<%= category.id %>"><%= category.name %></option>
+                <% }) %>
+            
+              </select>
+            </div>
+            <button class="btn btn-primary mt-4">Save</button>
+          </form>
+        </div>
+      </main>
+    </div>
     <%- include("../partials/scripts.ejs") %>
-    <%- include("../layouts/footer.ejs") %>
   </body>
-
 </html>

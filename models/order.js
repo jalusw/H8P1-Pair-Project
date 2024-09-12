@@ -21,10 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       return `Rp. ${CurrencyHelper.toIDR(this.price * this.quantity)},00`;
     }
 
-    get showStatusForBuyer() {
+    get showStatus() {
       switch (this.status) {
         case "paid":
-          return "On Process";
+          return "In Process";
+        case "delivered":
+          return "On Delivery";
       }
       return "Unknown";
     }
@@ -72,4 +74,3 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Order;
 };
-

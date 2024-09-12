@@ -14,7 +14,7 @@
   <%- include("../layouts/navbar.ejs") %>
     <header>
       <div class="container">
-        <h1 class="fw-bold my-5">Order In Progress</h1>
+        <h1 class="fw-bold my-5">Transaction History</h1>
       </div>
     </header>
     <main>
@@ -56,16 +56,9 @@
                           btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalInfo-<%= index %>">
                         <i class="bi bi-info-circle-fill"></i>
                       </button>
-                      <div class="mx-1"></div>
-                      <% if(product.Order.status == 'delivered') { %>
-                        <a class="btn btn-sm btn-outline-success" href="/order/<%= product.Order.id %>/complete">
-                          <i class="bi bi-patch-check"></i>
-                        </a>
-                      <% } %>
-
 
                       <!-- Modal -->
-                      <div class="modal fade" id="modalInfo-<%=index %>" data-bs-backdrop="static" data-bs-keyboard="false"
+                      <div class="modal fade" id="modalInfo-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -75,19 +68,10 @@
                                 aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                              <strong>Status</strong>
-                              <p>
-                                <%= product.Order.showStatus %>
-                              </p>
-                              <strong>Shipping Address</strong>
-                              <p>
-                                <%= product.Order.address %>
-                              </p>
                               <strong>Your Notes</strong>
                               <p>
                                 <%= product.Order?.note ? product.Order?.note : "-" %>
                               </p>
-
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
@@ -95,18 +79,24 @@
                           </div>
                         </div>
                       </div>
+                      <div class="mx-1"></div>
+                      <a class="btn btn-outline-danger btn-sm d-flex" href="/cart/<%= product.Order.id %>/delete"">
+                            <i class=" bi bi-trash"></i>
+                      </a>
                     </div>
                   </td>
                 </tr>
                 <% })%>
             </tbody>
+             
           </table>
+
         </div>
       </div>
     </main>
     <%- include("../partials/scripts.ejs") %>
-      <%- include("../partials/sweet-alert.ejs") %>
-        <%- include("../layouts/footer.ejs") %>
+    <%- include("../partials/sweet-alert.ejs") %>
+    <%- include("../layouts/footer.ejs") %>
 </body>
 
 </html>

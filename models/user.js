@@ -34,27 +34,75 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
+    static async allWithOrderInProgress() {
+      return await this.findAll({
+        include: [
+          {
+            model: sequelize.models.Biodata,
+          },
+          {
+            model: sequelize.models.Product,
+            through: {
+              attributes: ["id", "quantity", "price", "note", "address"],
+              where: {
+                status: {
+                  [Op.in]: ["paid"],
+                },
+              },
+            },
+            required: true,
+          },
+        ],
+      });
+    }
 
-    static async withOrder(id) {
+    static async withHistoryTransaction(id) {
       return await this.findByPk(id, {
-        include: {
-          model: sequelize.models.Product,
-          through: {
-            attributes: [
-              "quantity",
-              "note",
-              "address",
-              "id",
-              "price",
-              "status",
-            ],
-            where: {
-              status: {
-                [Op.in]: ["paid", "delivered"],
+        include: [
+          {
+            model: sequelize.models.Product,
+            through: {
+              attributes: [
+                "quantity",
+                "note",
+                "address",
+                "id",
+                "price",
+                "status",
+              ],
+              where: {
+                status: {
+                  [Op.in]: ["complete"],
+                },
               },
             },
           },
-        },
+        ],
+      });
+    }
+
+    static async withOrder(id) {
+      return await this.findByPk(id, {
+        include: [
+          {
+            model: sequelize.models.Product,
+            through: {
+              attributes: [
+                "quantity",
+                "note",
+                "address",
+                "id",
+                "price",
+                "status",
+              ],
+              where: {
+                status: {
+                  [Op.in]: ["paid", "delivered"],
+                },
+              },
+            },
+          },
+        ],
       });
     }
 

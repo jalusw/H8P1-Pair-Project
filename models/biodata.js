@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       if (!this.birthDate) return null;
       return DateHelper.formatDateInputValue(this.birthDate);
     }
+
+    get fullName() {
+      return `${this.firstName || "-"} ${this.lastName || "-"}`;
+    }
   }
   Biodata.init(
     {

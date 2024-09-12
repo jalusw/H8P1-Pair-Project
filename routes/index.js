@@ -8,6 +8,7 @@ const {
   OrderController,
   HomeController,
   CatalogueController,
+  TransactionController,
 } = require("../controllers");
 const CartController = require("../controllers/CartController");
 
@@ -46,5 +47,16 @@ router.post(
 );
 
 router.get("/order", AuthenticationMiddleware.auth, OrderController.index);
+router.get(
+  "/order/:id/complete",
+  AuthenticationMiddleware.auth,
+  OrderController.complete,
+);
+
+router.get(
+  "/transaction",
+  AuthenticationMiddleware.auth,
+  TransactionController.index,
+);
 
 module.exports = router;

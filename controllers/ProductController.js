@@ -1,4 +1,4 @@
-const { ErrorPageHelper } = require("../helpers");
+const { ErrorPageHelper, AvatarHelper, StorageHelper } = require("../helpers");
 const { Product, Category } = require("../models");
 
 class ProductController {
@@ -6,9 +6,9 @@ class ProductController {
     try {
       // do something ...
       const data = await Product.findAll({
-        include: Category
-      })
-      return res.render("pages/products", {data});
+        include: Category,
+      });
+      return res.render("pages/products", { data });
     } catch (error) {
       switch (error.name) {
         default:
@@ -20,12 +20,9 @@ class ProductController {
   static async addProduct(req, res, next) {
     try {
       // do something ...
-      let data = await Product.findAll({
-        include: Category
-      })
+      let categories = await Category.findAll();
 
-      // res.send(data);
-      return res.render("pages/addProduct", {data});
+      return res.render("pages/addProduct", { categories });
     } catch (error) {
       switch (error.name) {
         default:
@@ -34,13 +31,22 @@ class ProductController {
     }
   }
 
-
   static async postProduct(req, res, next) {
-    let {name, stock, price, image, description, CategoryId}= req.body
+    const { body, file } = req;
+
+    let image = "";
+
+    if (file?.filename) {
+      image = StorageHelper.generateUploadPath(file.filename);
+    }
+
     try {
-      // do something ...
-      await Product.create({name, stock, price, image, description, CategoryId})
-      return res.redirect('/products');
+      await Product.create({
+        image,
+        ...body,
+      });
+      req.flash("success", "Product added succesfully");
+      return res.redirect("/admin/products");
     } catch (error) {
       switch (error.name) {
         default:
@@ -50,11 +56,11 @@ class ProductController {
   }
 
   static async getEditProduct(req, res, next) {
-    let {id:id} = req.params
+    let { id } = req.params;
     try {
-      // do something ...
-      let data= await Product.findByPk(id)
-      return res.render("pages/editProduct", {data});
+      let categories = await Category.findAll();
+      let product = await Product.findByPk(id);
+      return res.render("pages/editProduct", { product, categories });
     } catch (error) {
       switch (error.name) {
         default:
@@ -63,13 +69,17 @@ class ProductController {
     }
   }
 
-  static async postEditProduct(req, res, next) {
-    let {id} = req.params
-    let {name, stock, price, image, description, CategoryId}= req.body
+  static async postEditProduct(req, res) {
+    const { params, body, file } = req;
+    const { id } = params;
     try {
-      // do something ...
-      await Product.update({name, stock, price, image, description, CategoryId},{where:{id:id}})
-      return res.redirect('/products');
+      if (file?.filename) {
+        body.image = StorageHelper.generateUploadPath(req.file.filename);
+      }
+      await Product.update(body, { where: { id } });
+
+      req.flash("success", "Product edit succesfully");
+      return res.redirect("/admin/products");
     } catch (error) {
       switch (error.name) {
         default:
@@ -79,13 +89,14 @@ class ProductController {
   }
 
   static async deleteProduct(req, res, next) {
-    
     try {
-      let {id} = req.params
+      let { id } = req.params;
       // do something ...
-      const instance = await Product.findByPk(id)
-      await instance.destroy({where:{id}})
-      return res.redirect('/admin/products');
+      const instance = await Product.findByPk(id);
+      await instance.destroy({ where: { id } });
+
+      req.flash("success", "Product deleted");
+      return res.redirect("/admin/products");
     } catch (error) {
       switch (error.name) {
         default:
@@ -95,12 +106,12 @@ class ProductController {
   }
 
   static async restockProduct(req, res, next) {
-    let {id} = req.params
+    let { id } = req.params;
     try {
       // do something ...
-      const instance = await Product.findByPk(id)
-      await instance.increament('stock')
-      return res.redirect('/products')
+      const instance = await Product.findByPk(id);
+      await instance.increment("stock");
+      return res.redirect("/admin/products");
     } catch (error) {
       switch (error.name) {
         default:
@@ -108,9 +119,6 @@ class ProductController {
       }
     }
   }
-
 }
-
-
 
 module.exports = ProductController;

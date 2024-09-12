@@ -56,6 +56,30 @@ class OrderController {
       }
     }
   }
+
+  static async complete(req, res) {
+    try {
+      // do something ...
+      const { id } = req.params;
+
+      await Order.update(
+        {
+          status: "complete",
+        },
+        {
+          where: { id },
+        },
+      );
+
+      req.flash("success", "Transaction has been completed !");
+      res.redirect("back");
+    } catch (error) {
+      switch (error.name) {
+        default:
+          return ErrorPageHelper.internalServerError(error, res);
+      }
+    }
+  }
 }
 
 module.exports = OrderController;
