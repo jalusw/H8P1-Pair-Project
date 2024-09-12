@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     let data = require('../data_product.json').map((e)=>{
-      delete e.description;
+      delete e.id;
       e.createdAt = e.updatedAt = Date()
       return e
     });
