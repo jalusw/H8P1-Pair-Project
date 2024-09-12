@@ -7,3 +7,13 @@
   });
   </script>
 <% } %>
+
+<% if(messages.error) { %>
+  <script>
+  Swal.fire({
+    title: "Failed !",
+    text: "<%= messages.error %>",
+    icon: "error"
+  });
+  </script>
+<% } %>

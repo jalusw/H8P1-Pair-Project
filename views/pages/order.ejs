@@ -14,7 +14,7 @@
   <%- include("../layouts/navbar.ejs") %>
     <header>
       <div class="container">
-        <h1 class="fw-bold my-5">Shopping Cart</h1>
+        <h1 class="fw-bold my-5">Order In Progress</h1>
       </div>
     </header>
     <main>
@@ -56,9 +56,16 @@
                           btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalInfo-<%= index %>">
                         <i class="bi bi-info-circle-fill"></i>
                       </button>
+                      <div class="mx-1"></div>
+                      <% if(product.Order.status == 'delivered') { %>
+                        <a class="btn btn-sm btn-outline-success" href="/order/<%= product.Order.id %>/complete">
+                          <i class="bi bi-patch-check"></i>
+                        </a>
+                      <% } %>
+
 
                       <!-- Modal -->
-                      <div class="modal fade" id="modalInfo-<%= index %>" data-bs-backdrop="static" data-bs-keyboard="false"
+                      <div class="modal fade" id="modalInfo-<%=index %>" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -68,10 +75,19 @@
                                 aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                              <strong>Status</strong>
+                              <p>
+                                <%= product.Order.showStatus %>
+                              </p>
+                              <strong>Shipping Address</strong>
+                              <p>
+                                <%= product.Order.address %>
+                              </p>
                               <strong>Your Notes</strong>
                               <p>
                                 <%= product.Order?.note ? product.Order?.note : "-" %>
                               </p>
+
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
@@ -79,73 +95,18 @@
                           </div>
                         </div>
                       </div>
-                      <div class="mx-1"></div>
-                      <a class="btn btn-outline-danger btn-sm d-flex" href="/cart/<%= product.Order.id %>/delete"">
-                            <i class=" bi bi-trash"></i>
-                      </a>
                     </div>
                   </td>
                 </tr>
                 <% })%>
             </tbody>
-            <tfoot>
-              <tr>
-                <td class="align-middle" colspan="4">
-                  <strong class="my-3">
-                    Total Payment
-                  </strong>
-                </td>
-                <td class="align-middle" colspan="2">
-                  <p class="my-3">
-                    Rp. <%= totalPayment %>,00
-                  </p>
-                </td>
-              </tr>
-            </tfoot>
           </table>
-
-        </div>
-        <% if(products.length > 0) { %>
-          <button type="button" class="btn btn-primary d-flex mt-5" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop">
-            <i class="bi bi-credit-card-2-front-fill mr-5"></i>
-            <div class="mx-1"></div>
-            Checkout
-          </button>       
-        <% } %>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <form action="/checkout" method="POST">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Checkout
-                    Confirmation</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div>
-                    <label for="address">Shipping Address</label>
-                    <textarea class="form-control" name="address"
-                      placeholder="Please write down your address so we can get your order shipped to you."><%= user.Biodatum?.address %></textarea>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Dismiss</button>
-                  <button type="submit" class="btn btn-primary">Continue</button>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
       </div>
     </main>
     <%- include("../partials/scripts.ejs") %>
-    <%- include("../partials/sweet-alert.ejs") %>
-    <%- include("../layouts/footer.ejs") %>
+      <%- include("../partials/sweet-alert.ejs") %>
+        <%- include("../layouts/footer.ejs") %>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,18 +11,98 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasOne(models.Biodata);
-      this.belongsToMany(models.Product, {through: models.Order});
+      this.belongsToMany(models.Product, { through: models.Order });
     }
 
-    static async withShoppingCart(id){
+    static async withShoppingCart(id) {
       return await this.findByPk(id, {
-        include : {
+        include: {
           model: sequelize.models.Product,
           through: {
-            attributes: ['quantity','note','address']
-          }
+            attributes: [
+              "quantity",
+              "note",
+              "address",
+              "id",
+              "price",
+              "status",
+            ],
+            where: {
+              status: "pending",
+            },
+          },
         },
+      });
+    }
+    static async allWithOrderInProgress() {
+      return await this.findAll({
+        include: [
+          {
+            model: sequelize.models.Biodata,
+          },
+          {
+            model: sequelize.models.Product,
+            through: {
+              attributes: ["id", "quantity", "price", "note", "address"],
+              where: {
+                status: {
+                  [Op.in]: ["paid"],
+                },
+              },
+            },
+            required: true,
+          },
+        ],
+      });
+    }
 
+    static async withHistoryTransaction(id) {
+      return await this.findByPk(id, {
+        include: [
+          {
+            model: sequelize.models.Product,
+            through: {
+              attributes: [
+                "quantity",
+                "note",
+                "address",
+                "id",
+                "price",
+                "status",
+              ],
+              where: {
+                status: {
+                  [Op.in]: ["complete"],
+                },
+              },
+            },
+          },
+        ],
+      });
+    }
+
+    static async withOrder(id) {
+      return await this.findByPk(id, {
+        include: [
+          {
+            model: sequelize.models.Product,
+            through: {
+              attributes: [
+                "quantity",
+                "note",
+                "address",
+                "id",
+                "price",
+                "status",
+              ],
+              where: {
+                status: {
+                  [Op.in]: ["paid", "delivered"],
+                },
+              },
+            },
+          },
+        ],
       });
     }
 

@@ -8,6 +8,7 @@ const {
   OrderController,
   HomeController,
   CatalogueController,
+  TransactionController,
 } = require("../controllers");
 const CartController = require("../controllers/CartController");
 
@@ -33,7 +34,29 @@ router.get("/catalogue/:id", CatalogueController.detail);
 
 router.get("/cart", AuthenticationMiddleware.auth, CartController.index);
 router.post("/cart", AuthenticationMiddleware.auth, CartController.add);
+router.get(
+  "/cart/:id/delete",
+  AuthenticationMiddleware.auth,
+  CartController.delete,
+);
+
+router.post(
+  "/checkout",
+  AuthenticationMiddleware.auth,
+  OrderController.checkout,
+);
 
 router.get("/order", AuthenticationMiddleware.auth, OrderController.index);
+router.get(
+  "/order/:id/complete",
+  AuthenticationMiddleware.auth,
+  OrderController.complete,
+);
+
+router.get(
+  "/transaction",
+  AuthenticationMiddleware.auth,
+  TransactionController.index,
+);
 
 module.exports = router;

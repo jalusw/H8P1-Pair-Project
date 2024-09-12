@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../partials/meta.ejs") %>
+    <title><%= title %></title>
+  </head>
+  <style>
+    .admin-layout {
+      display: flex;
+    }
+
+    main {
+      padding: 2rem;
+      flex: 1;
+    }
+  </style>
+
+  <body>
+    <%- include("../layouts/navbarAdmin.ejs") %>
+    <div class="admin-layout">
+      <%- include("../layouts/sidebar-admin.ejs") %>
+      <main>
+        <h1 class="fw-bold">Order In Progress</h1>
+        <% users.forEach(user => { %>
+          <article class="my-5">
+            <div class="d-flex align-items-end">
+              <img class="rounded-circle" src="<%= user.Biodatum.image %>" alt="" srcset="" height="35" width="35">
+              <div class="mx-2"></div>
+              <h2 class="h5"><%= user.Biodatum?.fullName %></h2>
+            </div>
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% user.Products.forEach(product => { %>
+                <tr>
+                  <td>
+                    <a href="/admin/products/<%= product.id %>">
+                      <%= product.name %>
+                    </a>
+                  </td>
+                  <td><%= product.Order.quantity %></td>
+                  <td><%= product.Order.totalPriceInRupiah %> </td>
+                  <td>
+                    <a class="btn btn-outline-primary" href="/admin/orders/<%= product.Order.id %>/process">Process to Delivery</a>
+                  </td>
+
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </article>
+        <% }) %>
+      </main>
+      <%- include("../partials/scripts.ejs") %>
+    </div>
+  </body>
+</html>

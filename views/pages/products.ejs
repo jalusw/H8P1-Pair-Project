@@ -12,6 +12,7 @@
 
       .admin-layout{
         display: flex;
+        min-height: 100vh;
       }
 
       main{
@@ -22,12 +23,13 @@
   </head>
 
   <body>
+      <%- include("../layouts/navbarAdmin.ejs") %>
     <div class="admin-layout">
       <%- include("../layouts/sidebar-admin.ejs") %>
       <main>
-        <h1>Daftar Produk</h1>
+        <h1 class="fw-bold">Our Products</h1>
 
-        <a href="/admin/products/add">Add Product</a>
+        <a class="btn btn-primary my-2" href="/admin/products/add">Add Product</a>
 
         <style>
           table {
@@ -61,16 +63,16 @@
             <tr>
               <% data.forEach((e)=> { %>
                 <tr>
-                  <td><img src="<%= e.image %>" alt=""></td>
+                  <td><img class="rounded" src="<%= e.image %>" alt="" height="250" width="250"></td>
                   <td><%= e.name %></td>
                   <td><%= e.stock %></td>
                   <td><%= e.price %></td>
                   <td><%= e.description %></td>
-                  <td><%= e.CategoryId %></td>
+                  <td><%= e.Category.name %></td>
                   <td>
-                    <a href="/products/<%= e.id %>/edit"><button>Edit</button></a>&nbsp;
-                    <a href="/products/<%= e.id %>/delete"><button>Delete</button></a>&nbsp;
-                    <a href="/products/<%= e.id %>/restock"><button>+</button></a>
+                    <a class="btn btn-warning" href="/admin/products/<%= e.id %>/edit">Edit</a>
+                    <a class="btn btn-danger" href="/admin/products/<%= e.id %>/delete">Delete</a>
+                    <a class="btn btn-info" href="/admin/products/<%= e.id %>/restock">Restock</a>
                 </td>
                 </tr>
               <%}) %>
@@ -80,6 +82,7 @@
     
 
     <%- include("../partials/scripts.ejs") %>
+    <%- include("../partials/sweet-alert.ejs") %>
 
     
   </body>
