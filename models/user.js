@@ -80,11 +80,12 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       hooks: {
         beforeCreate(instance, _) {
-          const { HashHelper, AvatarHelper } = require("../helpers");
+          const { HashHelper } = require("../helpers");
           instance.password = HashHelper.generate(instance.dataValues.password);
           instance.role = "General";
         },
         afterCreate(instance, _) {
+          const { AvatarHelper } = require("../helpers");
           sequelize.models.Biodata.create({
             image: AvatarHelper.generate(instance.email.split("@")[0]),
             UserId: instance.id,

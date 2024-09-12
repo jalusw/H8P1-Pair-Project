@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const { HomeController } = require("../controllers");
-const { AuthenticationMiddleware } = require("../middlewares");
+const {
+  AuthenticationMiddleware,
+  MulterMiddleware,
+} = require("../middlewares");
 const ProfileController = require("../controllers/ProfileController");
 
 const router = Router();
@@ -16,6 +19,7 @@ router.get(
 router.post(
   "/profile",
   AuthenticationMiddleware.auth,
+  MulterMiddleware().single("image"),
   ProfileController.update,
 );
 

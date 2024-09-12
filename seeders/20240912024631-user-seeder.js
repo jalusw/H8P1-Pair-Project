@@ -34,8 +34,8 @@ module.exports = {
         UserId: "1",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
-    ])
+      },
+    ]);
   },
 
   async down(queryInterface, Sequelize) {
