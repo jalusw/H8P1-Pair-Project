@@ -42,7 +42,9 @@
                       style="object-fit: cover;">
                   </td>
                   <td class="align-middle">
-                    <%= product.name %>
+                    <a href="/catalogue/<%= product.id %>">
+                      <%= product.name %>
+                    </a>
                   </td>
                   <td class="align-middle">
                     <%= product.Order.quantity %>

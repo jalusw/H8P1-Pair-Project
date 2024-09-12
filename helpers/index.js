@@ -15,5 +15,5 @@ module.exports = {
   AvatarHelper,
   DateHelper,
   StorageHelper,
-  CurrencyHelper
+  CurrencyHelper,
 };

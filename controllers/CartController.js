@@ -34,10 +34,19 @@ class CartController {
     try {
       const { body } = req;
       const { id: UserId } = res.locals.user;
-      await Order.create({
-        UserId,
-        ...body,
+      const [order, created] = await Order.findOrCreate({
+        where: {
+          UserId,
+          ProductId: body.ProductId,
+        },
+        defaults: {
+          UserId,
+          ...body,
+        },
       });
+      if (!created) {
+        order.update(body);
+      }
       req.flash("success", "Item added to your cart !");
       res.redirect("back");
     } catch (error) {

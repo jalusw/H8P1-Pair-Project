@@ -1,4 +1,9 @@
-const { ErrorPageHelper, AvatarHelper, StorageHelper } = require("../helpers");
+const {
+  ErrorPageHelper,
+  AvatarHelper,
+  StorageHelper,
+  ValidationErrorHelper,
+} = require("../helpers");
 const { Product, Category } = require("../models");
 
 class ProductController {
@@ -7,6 +12,7 @@ class ProductController {
       // do something ...
       const data = await Product.findAll({
         include: Category,
+        order: [["createdAt","DESC"]]
       });
       return res.render("pages/products", { data });
     } catch (error) {
@@ -22,7 +28,11 @@ class ProductController {
       // do something ...
       let categories = await Category.findAll();
 
-      return res.render("pages/addProduct", { categories });
+      return res.render("pages/addProduct", {
+        categories,
+        data: {},
+        errors: {},
+      });
     } catch (error) {
       switch (error.name) {
         default:
@@ -49,6 +59,14 @@ class ProductController {
       return res.redirect("/admin/products");
     } catch (error) {
       switch (error.name) {
+        case "SequelizeValidationError":
+          let categories = await Category.findAll();
+          return res.render("pages/addProduct", {
+            title: "Add Product",
+            errors: ValidationErrorHelper.mapErrorByPath(error.errors),
+            data: body,
+            categories,
+          });
         default:
           return ErrorPageHelper.internalServerError(error, res);
       }

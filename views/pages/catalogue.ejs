@@ -38,9 +38,14 @@
               </div>
             </div>
             <div class="my-4">
-              <strong></strong>
+              <strong>Sort by Price</strong>
+              <select class="form-select" name="sort" id="">
+                <option value="">-</option>
+                <option <%= query.sort == "asc" ? "selected" : "" %> value="asc">Lower to Higher</option>
+                <option <%= query.sort == "desc" ? "selected" : "" %> value="desc">Higher to Lower</option>
+              </select>
             </div>
-            <button class="btn btn-primary  col-12">Apply</button>
+            <button class="btn btn-primary mt-3 col-12">Apply</button>
           </form>
         </div>
         <div class="col-sm-12 col-md-9 ">
@@ -52,6 +57,7 @@
                     <div class="card-body">
                       <img src="<%= product.image %>" loading="lazy" class="card-img-top bg-secondary" alt="" style="object-fit: cover;" height="150">
                       <h2 class="line-clamp-1 text-sm h6 mt-3"><%= product.name %></h2>
+                      <p class="text-muted"><%= product.Category.name %></p>
                       <strong><%= product.priceInRupiah %></strong>
                     </div>
                   </article>

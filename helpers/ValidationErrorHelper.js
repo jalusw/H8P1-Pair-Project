@@ -7,7 +7,7 @@ class ValidationErrorHelper {
     return result;
   }
 
-  static firstError(sequelizeErrors){
+  static firstError(sequelizeErrors) {
     return sequelizeErrors.shift();
   }
 }

@@ -25,7 +25,14 @@ module.exports = (sequelize, DataTypes) => {
   Biodata.init(
     {
       image: DataTypes.STRING,
-      firstName: DataTypes.STRING,
+      firstName: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            msg: "Don't forget to put your first name",
+          },
+        },
+      },
       lastName: DataTypes.STRING,
       gender: DataTypes.STRING,
       birthDate: {

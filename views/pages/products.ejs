@@ -32,17 +32,7 @@
         <a class="btn btn-primary my-2" href="/admin/products/add">Add Product</a>
 
         <style>
-          table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-          }
-          
-          td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-          }
+       
           
           
           </style>
@@ -50,7 +40,7 @@
           <body>
           
           
-          <table>
+          <table class="table">
             <tr>
               <th>Image</th>
               <th>Product Name</th>
@@ -63,7 +53,7 @@
             <tr>
               <% data.forEach((e)=> { %>
                 <tr>
-                  <td><img class="rounded" src="<%= e.image %>" alt="" height="250" width="250"></td>
+                  <td><img class="rounded" style="object-fit: cover;" src="<%= e.image %>" alt="" height="250" width="250"></td>
                   <td><%= e.name %></td>
                   <td><%= e.stock %></td>
                   <td><%= e.price %></td>

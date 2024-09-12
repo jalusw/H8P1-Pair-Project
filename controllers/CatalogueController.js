@@ -5,6 +5,7 @@ class CatalogueController {
   static async index(req, res) {
     try {
       const { query } = req;
+      const productSort = [["createdAt", "DESC"]];
       const filterCategory = {};
       const filterProduct = {
         name: {
@@ -22,6 +23,10 @@ class CatalogueController {
         };
       }
 
+      if (query.sort == "asc" || query.sort == "desc") {
+        productSort.push(["price", query.sort]);
+      }
+
       const products = await Product.findAll({
         include: {
           model: Category,
@@ -29,7 +34,7 @@ class CatalogueController {
         },
         where: filterProduct,
         limit: 20,
-        order: [["createdAt", "DESC"]],
+        order: productSort,
       });
 
       const categories = await Category.findAll();
