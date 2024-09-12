@@ -14,14 +14,13 @@ class ProductController {
       }
     }
   }
-}
 
-class ProductAdd {
-  static async index(req, res, next) {
+  static async addProduct(req, res, next) {
     try {
       // do something ...
       const data = await Product.findAll()
-      return res.render("pages/products", {data});
+      // res.send(data);
+      return res.render("pages/addProduct", {data});
     } catch (error) {
       switch (error.name) {
         default:
@@ -29,6 +28,9 @@ class ProductAdd {
       }
     }
   }
+
 }
 
-module.exports = {ProductController, ProductAdd};
+
+
+module.exports = ProductController;

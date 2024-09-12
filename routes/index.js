@@ -1,10 +1,15 @@
 const { Router } = require("express");
-const { HomeController } = require("../controllers");
 const {
   AuthenticationMiddleware,
   MulterMiddleware,
 } = require("../middlewares");
-const ProfileController = require("../controllers/ProfileController");
+const {
+  ProfileController,
+  OrderController,
+  HomeController,
+  CatalogueController,
+} = require("../controllers");
+const CartController = require("../controllers/CartController");
 
 const router = Router();
 
@@ -22,5 +27,13 @@ router.post(
   MulterMiddleware().single("image"),
   ProfileController.update,
 );
+
+router.get("/catalogue", CatalogueController.index);
+router.get("/catalogue/:id", CatalogueController.detail);
+
+router.get("/cart", AuthenticationMiddleware.auth, CartController.index);
+router.post("/cart", AuthenticationMiddleware.auth, CartController.add);
+
+router.get("/order", AuthenticationMiddleware.auth, OrderController.index);
 
 module.exports = router;

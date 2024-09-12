@@ -41,6 +41,12 @@ app.use(
   }),
 );
 
+
+app.use((req,res,next) => {
+ req.session.user = 2;
+  next();
+})
+
 app.use("/", AuthenticationMiddleware.session);
 app.use("/", indexRouter);
 app.use("/", authRouter);
