@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../partials/meta.ejs") %>
+    <title><%= title %></title>
+    <style>
+      .wrapper {
+        max-width: 860px;
+        margin: 0;
+      }
+      .profile-image {
+        margin-right: 1rem;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include("../layouts/navbar.ejs") %>
+    <main>
+      <div class="container mt-5">
+        <div class="wrapper">
+          <form method="POST" enctype="multipart/form-data">
+            <div>
+              <label>
+                <input
+                  class="d-none"
+                  name="image"
+                  type="file"
+                  id="image-control"
+                />
+                <img
+                  class="rounded-circle profile-image"
+                  id="image-preview"
+                  src="<%= user.Biodatum.image %>"
+                  alt=""
+                  width="150"
+                  height="150"
+                />
+              </label>
+              <label class="btn btn-outline-primary" for="image-control"
+                >Choose file</label
+              >
+            </div>
+            <div class="row mt-5">
+              <div class="col-sm-12 col-md-6 my-2">
+                <label for="firstName">First Name</label>
+                <input
+                  class="form-control"
+                  id="firstName"
+                  type="text"
+                  name="firstName"
+                  placeholder="John"
+                />
+              </div>
+              <div class="col-sm-12 col-md-6 my-2">
+                <label for="lastName">Last Name</label>
+                <input
+                  class="form-control"
+                  id="lastName"
+                  type="text"
+                  name="lastName"
+                  placeholder="Doe"
+                />
+              </div>
+              <div class="col-sm-12 col-md-6 my-2">
+                <label for="age">Age</label>
+                <input
+                  class="form-control"
+                  id="age"
+                  type="number"
+                  name="age"
+                  placeholder="20"
+                />
+              </div>
+              <div class="col-sm-12 col-md-6 my-2">
+                <label for="birthDate">Birth Date</label>
+                <input
+                  class="form-control"
+                  id="birthDate"
+                  type="date"
+                  name="birthDate"
+                />
+              </div>
+              <div class="col-12 my-2">
+                <label for="address">Address</label>
+                <textarea
+                  class="form-control"
+                  name="address"
+                  id="address"
+                  placeholder="123 Main St, Springfield, IL 62704"
+                ></textarea>
+              </div>
+            </div>
+              <button class="btn btn-primary d-flex mt-5">
+                <i class="bi bi-save d-inline-block"></i>
+                <div class="mx-1"></div>
+                <span class="inline-block"> Save Profile </span>
+              </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <%- include("../partials/scripts.ejs") %>
+    <script>
+      const imageControl = document.getElementById("image-control");
+      const imagePreview = document.getElementById("image-preview");
+      imageControl.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (!file || file.type.split("/")[0] != "image") return;
+        imagePreview.src = URL.createObjectURL(file);
+      });
+    </script>
+  </body>
+</html>

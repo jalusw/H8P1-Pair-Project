@@ -1,4 +1,4 @@
-const { HashHelper } = require("../helpers");
+const { HashHelper, ErrorPageHelper } = require("../helpers");
 const { User } = require("../models");
 
 class AuthenticationController {
@@ -57,14 +57,7 @@ class AuthenticationController {
             data: body,
           });
         default:
-          return res.status(500).render("error", {
-            error: {
-              status: "500 Internal Server Error",
-              stack: error,
-            },
-            message:
-              "Oops! Something went wrong on our end. Please try again later",
-          });
+          return ErrorPageHelper.internalServerError(error, res);
       }
     }
   }

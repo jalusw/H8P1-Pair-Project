@@ -7,8 +7,20 @@
     <title><%= title %></title>
     <style>
       .container {
-        max-width: 560px;
+        max-width: 1060px;
         padding: 5rem 0;
+      }
+
+        .wrapper-login{
+          row-gap: 2rem;
+              
+        }
+       @media screen and (min-width: 768px) {
+        .wrapper-login{
+          column-gap: 2rem;
+              
+        }
+
       }
     </style>
   </head>
@@ -16,70 +28,77 @@
     <main>
       <div class="container">
         <div class="border p-5 rounded">
-          <h1 class="fw-bold">Sign Up</h1>
-          <p class="text-secondary">Please sign up tocontinue.</p>
-          <form class="mt-4" method="POST">
-            <div class="mb-3">
-              <label class="form-label fw-bold" for="email"
-                >Email address</label
-              >
-              <input
-                class="form-control"
-                type="email"
-                id="email"
-                aria-describedby="emailHelp"
-                name="email"
-                placeholder="example@example.com"
-                value="<%= data.email %>"
-              />
-              <div id="emailHelp" class="form-text">
-                We'll never share your email with anyone else.
+          <div class="row align-items-center wrapper-login">
+            <div class="col-sm-12 col-md-5">
+              <img style="display:block;width: 100%;" src="/svgs/sign-up.svg" alt="">
+            </div>
+            <div class="col-sm-12 col-md-6">
+            <h1 class="fw-bold">Sign Up</h1>
+            <p class="text-secondary">Just sign up to keep going!</p>
+            <form class="mt-4" method="POST">
+              <div class="mb-3">
+                <label class="form-label fw-bold" for="email"
+                  >Email address</label
+                >
+                <input
+                  class="form-control"
+                  type="email"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  name="email"
+                  placeholder="example@example.com"
+                  value="<%= data.email %>"
+                />
+                <div id="emailHelp" class="form-text">
+                  We'll never share your email with anyone else.
+                </div>
+                <% if(errors.email) { %> 
+                  <p class="text-danger">
+                    <%= errors.email?.message %>
+                  </p>
+                <% } %>
               </div>
-              <% if(errors.email) { %> 
-                <p class="text-danger">
-                  <%= errors.email?.message %>
-                </p>
-              <% } %>
+              <div class="mb-3">
+                <label class="form-label fw-bold" for="password">Password</label>
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="**********"
+                  value="<%= data.password %>"
+                />
+                <% if(errors.password) { %> 
+                  <p class="text-danger">
+                    <%= errors.password?.message %>
+                  </p>
+                <% } %>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold" for="passwordConfirmation"
+                  >Password Confirmation</label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  id="passwordConfirmation"
+                  name="passwordConfirmation"
+                  placeholder="**********"
+                  value="<%= data.passwordConfirmation %>"
+                />
+                <% if(errors.passwordConfirmation) { %> 
+                  <p class="text-danger">
+                    <%= errors.passwordConfirmation?.message %>
+                  </p>
+                <% } %>
+              </div>
+              <button class="btn btn-primary mt-3" type="submit">Register</button>
+              <div class="mt-4">
+                <a href="/login">Already have an account ?</a>
+              </div>
+            </form>
             </div>
-            <div class="mb-3">
-              <label class="form-label fw-bold" for="password">Password</label>
-              <input
-                class="form-control"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="**********"
-                value="<%= data.password %>"
-              />
-              <% if(errors.password) { %> 
-                <p class="text-danger">
-                  <%= errors.password?.message %>
-                </p>
-              <% } %>
-            </div>
-            <div class="mb-3">
-              <label class="form-label fw-bold" for="password"
-                >Password Confirmation</label
-              >
-              <input
-                class="form-control"
-                type="password"
-                id="password"
-                name="passwordConfirmation"
-                placeholder="**********"
-                value="<%= data.passwordConfirmation %>"
-              />
-              <% if(errors.passwordConfirmation) { %> 
-                <p class="text-danger">
-                  <%= errors.passwordConfirmation?.message %>
-                </p>
-              <% } %>
-            </div>
-            <button class="btn btn-primary mt-3" type="submit">Register</button>
-            <div class="mt-4">
-              <a href="/login">Already have an account ?</a>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </main>
