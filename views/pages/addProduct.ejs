@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../partials/meta.ejs") %>
+    <title>Add Product</title>
+  </head>
+
+  <body>
+    <%- include("../layouts/navbarAdmin.ejs") %>
+
+
+    <h2>Add New Product</h2>
+    <form method="post">
+      <label for="">Image</label><br>
+      <input type="text" name="image"><br><br>
+      <label for="">Product Name</label><br>
+      <input type="text" name="name"><br><br>
+      <label for="">Stock</label><br>
+      <input type="text" name="stock"><br><br>
+      <label for="">Prices</label><br>
+      <input type="text" name="price"><br><br>
+      <label for="">Description</label><br>
+      <input type="text" name="description"><br><br>
+      <select name="CategoryId" id="">
+        <option value="1">Food</option>
+        <option value="2">Clothing</option>
+        <option value="3">Electronic</option>
+        <option value="4">Other</option>
+    </select><br><br>
+      <button>ADD</button><br><br>
+    </form>
+    <%- include("../partials/scripts.ejs") %>
+    <%- include("../layouts/footer.ejs") %>
+  </body>
+
+</html>
