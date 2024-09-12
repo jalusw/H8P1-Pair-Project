@@ -1,13 +1,27 @@
-const { ErrorPageHelper, AuthenticationHelper, ValidationErrorHelper } = require("../helpers");
+const {
+  ErrorPageHelper,
+  ValidationErrorHelper,
+  CurrencyHelper,
+} = require("../helpers");
 const { User, Order } = require("../models");
 
 class CartController {
-  static async index(req, res, next) {
+  static async index(req, res) {
     try {
       const { id } = res.locals.user;
-      const user = await User.withShoppingCart(id);
-      res.send(user);
-      // return res.render("pages/cart", { user });
+      const { Products: products } = await User.withShoppingCart(id);
+      const totalPayment = CurrencyHelper.toIDR(
+        products.reduce(
+          (current, product) =>
+            current + product.Order.price * product.Order.quantity,
+          0,
+        ),
+      );
+      return res.render("pages/cart", {
+        products,
+        totalPayment,
+        title: "Cart",
+      });
     } catch (error) {
       switch (error.name) {
         default:
@@ -16,10 +30,10 @@ class CartController {
     }
   }
 
-  static async add(req, res, next) {
+  static async add(req, res) {
     try {
       const { body } = req;
-      const { UserId } = res.locals.user;
+      const { id: UserId } = res.locals.user;
       await Order.create({
         UserId,
         ...body,
@@ -29,11 +43,31 @@ class CartController {
     } catch (error) {
       switch (error.name) {
         case "SequelizeValidationError":
-          const errors = ValidationErrorHelper.mapErrorByPath(error.errors);
-          debugger;
-    
-          req.flash("success", ValidationError);
+          req.flash(
+            "error",
+            ValidationErrorHelper.firstError(error.errors).message,
+          );
           return res.redirect("back");
+        default:
+          return ErrorPageHelper.internalServerError(error, res);
+      }
+    }
+  }
+
+  static async delete(req, res) {
+    try {
+      const { params } = req;
+      const { id } = params;
+      debugger;
+      await Order.destroy({
+        where: {
+          id,
+        },
+      });
+      req.flash("success", "Item deleted from your cart !");
+      res.redirect("back");
+    } catch (error) {
+      switch (error.name) {
         default:
           return ErrorPageHelper.internalServerError(error, res);
       }

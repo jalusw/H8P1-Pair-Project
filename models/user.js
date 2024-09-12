@@ -11,18 +11,27 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.hasOne(models.Biodata);
-      this.belongsToMany(models.Product, {through: models.Order});
+      this.belongsToMany(models.Product, { through: models.Order });
     }
 
-    static async withShoppingCart(id){
+    static async withShoppingCart(id) {
       return await this.findByPk(id, {
-        include : {
+        include: {
           model: sequelize.models.Product,
           through: {
-            attributes: ['quantity','note','address']
-          }
+            attributes: [
+              "quantity",
+              "note",
+              "address",
+              "id",
+              "price",
+              "status",
+            ],
+            where: {
+              status: "pending",
+            },
+          },
         },
-
       });
     }
 
