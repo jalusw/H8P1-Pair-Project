@@ -25,6 +25,12 @@ Navigate to the directory
 cd H8P1-Pair-Project
 ```
 
+set up the env
+
+```
+mv .env.example .env
+```
+
 Install dependencies
 
 ```bash
