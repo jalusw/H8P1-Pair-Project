@@ -27,20 +27,21 @@
     <div class="admin-layout">
       <%- include("../layouts/sidebar-admin.ejs") %>
       <main>
-        <h1 class="fw-bold">Our Products</h1>
+        <div class="d-flex justify-content-between my-5">
+        <h1 class="fw-bold">Products</h1>
 
         <a class="btn btn-primary my-2" href="/admin/products/add">Add Product</a>
 
-        <style>
-       
+        </div>
+
+
           
           
-          </style>
-          </head>
-          <body>
-          
-          
-          <table class="table">
+          <form method="GET" class="d-flex gx-5">
+            <input class="form-control" type="text" placeholder="Search Something ..." name="search" value="<%= query?.search %>">
+            <button class="btn btn-outline-primary">Search</button>
+          </form>
+          <table class="table mt-5">
             <tr>
               <th>Image</th>
               <th>Product Name</th>
@@ -56,7 +57,7 @@
                   <td><img class="rounded" style="object-fit: cover;" src="<%= e.image %>" alt="" height="250" width="250"></td>
                   <td><%= e.name %></td>
                   <td><%= e.stock %></td>
-                  <td><%= e.price %></td>
+                  <td><%= e.priceInRupiah %></td>
                   <td><%= e.description %></td>
                   <td><%= e.Category.name %></td>
                   <td>

@@ -27,6 +27,10 @@ class CatalogueController {
         productSort.push(["price", query.sort]);
       }
 
+      if (query.sortDate == "asc" || query.sortDate == "desc") {
+        productSort[0] = ["createdAt", query.sortDate];
+      }
+
       const products = await Product.findAll({
         include: {
           model: Category,

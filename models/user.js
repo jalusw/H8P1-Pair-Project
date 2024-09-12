@@ -34,6 +34,27 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
+    static async allWithTransaction() {
+      return await this.findAll({
+        include: [
+          {
+            model: sequelize.models.Biodata,
+          },
+          {
+            model: sequelize.models.Product,
+            through: {
+                attributes: ["id", "quantity", "price", "note", "address","status","createdAt"],
+              where: {
+                status: {
+                  [Op.in]: ["complete"],
+                },
+              },
+            },
+            required: true,
+          },
+        ],
+      });
+    }
     static async allWithOrderInProgress() {
       return await this.findAll({
         include: [
@@ -43,10 +64,10 @@ module.exports = (sequelize, DataTypes) => {
           {
             model: sequelize.models.Product,
             through: {
-              attributes: ["id", "quantity", "price", "note", "address"],
+                attributes: ["id", "quantity", "price", "note", "address","status","createdAt"],
               where: {
                 status: {
-                  [Op.in]: ["paid"],
+                  [Op.in]: ["paid","delivered"],
                 },
               },
             },

@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
   ErrorPageHelper,
   AvatarHelper,
@@ -10,11 +11,18 @@ class ProductController {
   static async index(req, res, next) {
     try {
       // do something ...
+
+      const {search = ""} = req.query;
       const data = await Product.findAll({
         include: Category,
-        order: [["createdAt","DESC"]]
+        order: [["createdAt", "DESC"]],
+        where: {
+          name: {
+            [Op.iLike]: `%${search}%`
+          }
+        }
       });
-      return res.render("pages/products", { data });
+      return res.render("pages/products", { data, query: req.query });
     } catch (error) {
       switch (error.name) {
         default:
@@ -78,7 +86,7 @@ class ProductController {
     try {
       let categories = await Category.findAll();
       let product = await Product.findByPk(id);
-      return res.render("pages/editProduct", { product, categories });
+      return res.render("pages/editProduct", { product, categories, errors: {} });
     } catch (error) {
       switch (error.name) {
         default:
@@ -100,6 +108,15 @@ class ProductController {
       return res.redirect("/admin/products");
     } catch (error) {
       switch (error.name) {
+        case "SequelizeValidationError":
+          let categories = await Category.findAll();
+          let product = await Product.findByPk(id);
+          return res.render("pages/editProduct", {
+            title: "Edit Product",
+            errors: ValidationErrorHelper.mapErrorByPath(error.errors),
+            categories,
+            product
+          });
         default:
           return ErrorPageHelper.internalServerError(error, res);
       }

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     get priceInRupiah() {
-      const { CurrencyHelper } = require("../helpers");
+      const { CurrencyHelper, DateHelper } = require("../helpers");
       return `Rp. ${CurrencyHelper.toIDR(this.price)},00`;
     }
 
@@ -27,8 +27,19 @@ module.exports = (sequelize, DataTypes) => {
           return "In Process";
         case "delivered":
           return "On Delivery";
+        case "complete":
+          return "Completed";
       }
       return "Unknown";
+    }
+
+    get isOnDelivery(){
+      return this.status == "delivered";
+    }
+
+    get createdAtInID(){
+      const { DateHelper } = require("../helpers");
+      return DateHelper.formatToID(this.createdAt);
     }
   }
   Order.init(

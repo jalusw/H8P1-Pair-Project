@@ -47,18 +47,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            msg: "Please prove the stock",
+            msg: "Please provide the stock",
           },
-          min:0
+          min: 0,
         },
       },
       price: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
-            msg: "Please prove the stock",
+            msg: "Please provide the price",
           },
-          min: 0
+          min: 0,
         },
       },
       image: DataTypes.STRING,

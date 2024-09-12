@@ -22,7 +22,7 @@
     <div class="admin-layout">
       <%- include("../layouts/sidebar-admin.ejs") %>
       <main>
-        <h1 class="fw-bold">Order In Process</h1>
+        <h1 class="fw-bold">Transaction History</h1>
         <% users.forEach((user,indexUser) => { %>
           <article class="my-5">
             <div class="d-flex align-items-center">
@@ -62,9 +62,6 @@
                           btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalInfo-<%= index %>-<%= indexUser %>">
                         <i class="bi bi-info-circle-fill"></i>
                       </button>
-                      <% if(!product.Order.isOnDelivery) {  %>
-                        <a class="btn btn-outline-primary btn-sm" href="/admin/orders/<%= product.Order.id %>/process">Process to Delivery</a>
-                      <% } %>
                       <div class="modal fade" id="modalInfo-<%=index %>-<%= indexUser %>" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">

@@ -7,6 +7,10 @@ class DateHelper {
     return new Date(date).toISOString().substring(0, 10);
   }
 
-  static generateAge() {}
+  static formatToID(date) {
+    return new Intl.DateTimeFormat("id-ID", {
+      dateStyle: "full",
+    }).format(date);
+  }
 }
 module.exports = DateHelper;

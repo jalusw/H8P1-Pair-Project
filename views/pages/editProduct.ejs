@@ -26,9 +26,12 @@
           <h1 class="fw-bold">Edit Product</h1>
           <form method="POST" enctype="multipart/form-data">
             <div class="my-3">
+              <img class="rounded" src="<%= product.image %>" alt="" width="350" height="350" style="object-fit: cover">
+              <div class="mt-4">
               <label for="">Image</label>
               <input class="form-control" type="file" name="image" />
-            </div>
+               </div>
+           </div>
             <div class="my-3">
               <label for="">Product Name</label>
               <input
@@ -38,6 +41,9 @@
                 placeholder="Box"
                 value="<%= product.name %>"
               />
+             <% if(errors.name) { %>
+                <p class="text-danger"><%= errors.name?.message %></p>
+              <% } %>
             </div>
             <div class="my-3">
               <label for="">Stock</label>
@@ -48,6 +54,9 @@
                 placeholder="0"
                 value="<%= product.stock %>"
               />
+              <% if(errors.stock) { %>
+                <p class="text-danger"><%= errors.stock?.message %></p>
+              <% } %>
             </div>
             <div class="my-3">
               <label for="">Price</label>
@@ -58,6 +67,9 @@
                 placeholder="100000"
                 value="<%= product.price %>"
               />
+              <% if(errors.price) { %>
+                <p class="text-danger"><%= errors.price?.message %></p>
+              <% } %>
             </div>
             <div class="my-3">
               <label for="">Description</label>

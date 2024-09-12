@@ -45,6 +45,14 @@
                 <option <%= query.sort == "desc" ? "selected" : "" %> value="desc">Higher to Lower</option>
               </select>
             </div>
+            <div class="my-4">
+              <strong>Sort by date</strong>
+              <select class="form-select" name="sortDate" id="">
+                <option value="">-</option>
+                <option <%= query.sortDate == "asc" ? "selected" : "" %> value="asc">Latest</option>
+                <option <%= query.sortDate == "desc" ? "selected" : "" %> value="desc">Oldest</option>
+              </select>
+            </div>
             <button class="btn btn-primary mt-3 col-12">Apply</button>
           </form>
         </div>
