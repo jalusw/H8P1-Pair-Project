@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       const { CurrencyHelper } = require("../helpers");
       return `Rp. ${CurrencyHelper.toIDR(this.price * this.quantity)},00`;
     }
+
+    get showStatusForBuyer() {
+      switch (this.status) {
+        case "paid":
+          return "On Process";
+      }
+      return "Unknown";
+    }
   }
   Order.init(
     {

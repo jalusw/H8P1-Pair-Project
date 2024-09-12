@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { ProductController, DashboardController } = require("../controllers");
 const { AuthenticationMiddleware } = require("../middlewares");
+const AdminOrderController = require("../controllers/AdminOrderController");
 
 const router = Router();
 
@@ -25,6 +26,13 @@ router.get(
   AuthenticationMiddleware.auth,
   AuthenticationMiddleware.admin,
   ProductController.addProduct,
+);
+
+router.get(
+  "/orders",
+  AuthenticationMiddleware.auth,
+  AuthenticationMiddleware.admin,
+  AdminOrderController.index,
 );
 
 module.exports = router;

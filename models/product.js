@@ -10,12 +10,26 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Category);
-      this.belongsToMany(models.User, {through: models.Order});
+      this.belongsToMany(models.User, { through: models.Order });
     }
 
-    get priceInRupiah(){
+    get priceInRupiah() {
       const { CurrencyHelper } = require("../helpers");
-      return `Rp ${CurrencyHelper.toIDR(this.price)}`; 
+      return `Rp ${CurrencyHelper.toIDR(this.price)},00`;
+    }
+
+    static async getInProgressOrder() {
+      return await this.findAll({
+        include: {
+          model: sequelize.models.User,
+          through: {
+            where: {
+              status: "paid",
+            },
+          },
+          required: true,
+        },
+      });
     }
   }
   Product.init(

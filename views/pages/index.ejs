@@ -13,25 +13,29 @@
   </head>
 
   <body>
-    <%- include("../layouts/navbar.ejs") %>
-    <%- include("../layouts/search-bar.ejs") %>
+    <%- include("../layouts/navbar.ejs") %> <%-
+    include("../layouts/search-bar.ejs") %>
     <header class="header">
       <div class="py-5 rounded-3">
         <div class="container">
           <div class="row align-items-center">
-            <div class="col-lg-5"> 
-                <h1 class="text-body-emphasis text-xxl">Welcome To Toko Biru</h1>
-                <p class="col-lg-12 text-muted lh-lg">
-                  Welcome to our store! Here, you can snag just about anything you’re looking for. Dive in and see what catches your eye!
-                </p>
-                <a class="btn btn-outline-primary mt-3 d-inline-flex" href="/catalogue">
-                  <i class="bi bi-shop"></i>
-                  <div class="mx-1"></div>
-                  <span> Start Shopping ! </span>
-                </a>
+            <div class="col-lg-5">
+              <h1 class="text-body-emphasis text-xxl">Welcome To Toko Biru</h1>
+              <p class="col-lg-12 text-muted lh-lg">
+                Welcome to our store! Here, you can snag just about anything
+                you’re looking for. Dive in and see what catches your eye!
+              </p>
+              <a
+                class="btn btn-outline-primary mt-3 d-inline-flex"
+                href="/catalogue"
+              >
+                <i class="bi bi-shop"></i>
+                <div class="mx-1"></div>
+                <span> Start Shopping ! </span>
+              </a>
             </div>
             <div class="col-lg-6">
-              <img src="/svgs/shopping-bag.svg" alt="" srcset="">
+              <img src="/svgs/shopping-bag.svg" alt="" srcset="" />
             </div>
           </div>
         </div>
@@ -39,7 +43,7 @@
     </header>
 
     <main></main>
-    <%- include("../layouts/footer.ejs") %>
-    <%- include("../partials/scripts.ejs") %>
+    <%- include("../layouts/footer.ejs") %> <%-
+    include("../partials/scripts.ejs") %>
   </body>
 </html>

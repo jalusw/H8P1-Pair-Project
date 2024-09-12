@@ -58,7 +58,6 @@ class CartController {
     try {
       const { params } = req;
       const { id } = params;
-      debugger;
       await Order.destroy({
         where: {
           id,

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include("../partials/meta.ejs") %>
+    <title>
+      <%= title %>
+    </title>
+</head>
+<style>
+  .admin-layout {
+    display: flex;
+  }
+
+  main {
+    padding: 2rem;
+  }
+</style>
+
+<body>
+  <div class="admin-layout">
+    <%- include("../layouts/sidebar-admin.ejs") %>
+      <main>
+        <h1 class="fw-bold">Order</h1>
+        <table>
+
+        </table>
+      </main>
+      <%- include("../partials/scripts.ejs") %>
+  </div>
+</body>
+
+</html>

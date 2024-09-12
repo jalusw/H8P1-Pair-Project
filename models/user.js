@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -29,6 +29,29 @@ module.exports = (sequelize, DataTypes) => {
             ],
             where: {
               status: "pending",
+            },
+          },
+        },
+      });
+    }
+
+    static async withOrder(id) {
+      return await this.findByPk(id, {
+        include: {
+          model: sequelize.models.Product,
+          through: {
+            attributes: [
+              "quantity",
+              "note",
+              "address",
+              "id",
+              "price",
+              "status",
+            ],
+            where: {
+              status: {
+                [Op.in]: ["paid", "delivered"],
+              },
             },
           },
         },

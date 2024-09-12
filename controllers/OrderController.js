@@ -1,10 +1,12 @@
 const { ErrorPageHelper } = require("../helpers");
-const { User, Order } = require("../models");
+const { User, Order, Product } = require("../models");
 
 class OrderController {
   static async index(req, res) {
     try {
-      // do something ...
+      const { id } = res.locals.user;
+      const { Products: products } = await User.withOrder(id);
+      return res.render("pages/order", { products });
     } catch (error) {
       switch (error.name) {
         default:
@@ -19,7 +21,17 @@ class OrderController {
       const { body } = req;
       const { id } = res.locals.user;
       const { Products: products } = await User.withShoppingCart(id);
-      products.forEach(async ({ Order: order }) => {
+      products.forEach(async (product) => {
+        await Product.update(
+          {
+            stock: product.stock - product.Order.quantity,
+          },
+          {
+            where: {
+              id: product.id,
+            },
+          },
+        );
         await Order.update(
           {
             status: "paid",
@@ -27,7 +39,7 @@ class OrderController {
           },
           {
             where: {
-              id: order.id,
+              id: product.Order.id,
             },
           },
         );

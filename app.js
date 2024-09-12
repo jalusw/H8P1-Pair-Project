@@ -42,7 +42,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
-  req.session.user = 2;
+  req.session.user = 1;
   next();
 });
 
