@@ -23,7 +23,7 @@ class RegisterController {
             errors: ValidationErrorHelper.mapErrorByPath(error.errors),
             data: body,
           });
-      case "SequelizeUniqueConstraintError":
+        case "SequelizeUniqueConstraintError":
           return res.render("pages/register", {
             title: "Register",
             errors: ValidationErrorHelper.mapErrorByPath(error.errors),

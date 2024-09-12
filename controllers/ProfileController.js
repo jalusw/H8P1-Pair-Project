@@ -13,7 +13,7 @@ class ProfileController {
     }
   }
 
-  static async update(req,res){
+  static async update(req, res) {
     try {
       return res.render("pages/profile", { title: "Profile" });
     } catch (error) {
@@ -22,7 +22,6 @@ class ProfileController {
           return ErrorPageHelper.internalServerError(error, res);
       }
     }
-
   }
 }
 

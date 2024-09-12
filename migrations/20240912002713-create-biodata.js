@@ -18,8 +18,8 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      age: {
-        type: Sequelize.INTEGER,
+      gender: {
+        type: Sequelize.STRING,
       },
       birthDate: {
         type: Sequelize.DATE,

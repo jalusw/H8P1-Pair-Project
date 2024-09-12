@@ -6,8 +6,19 @@
     <%- include("../partials/meta.ejs") %>
     <title><%= title %></title>
   </head>
+  <style>
+    .admin-layout {
+      display: flex;
+    }
+
+    main {
+      padding: 2rem;
+    }
+  </style>
 
   <body>
+    <%- include("../layouts/sidebar-admin.ejs") %>
+    <main></main>
     <%- include("../partials/scripts.ejs") %>
   </body>
 </html>

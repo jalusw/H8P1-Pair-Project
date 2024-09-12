@@ -35,7 +35,11 @@
               <a class="dropdown-item" href="/profile">Profile</a>
             </li>
             <% if(user.isAdmin) { %>
-              <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+              <li class="dropdown-item d-flex align-items-center">
+                <i class="bi bi-speedometer2"></i>
+                <div class="mx-2"></div>
+                <a class="nav-link" href="/admin/">Dashboard</a>
+              </li>
             <% } %>
             <li class="dropdown-item d-flex align-items-center" >
               <i class="bi bi-clock-history"></i>

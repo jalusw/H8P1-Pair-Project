@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Biodata);
     }
 
-    get isAdmin(){
-      return this.role == 'Admin';
+    get isAdmin() {
+      return this.role == "Admin";
     }
   }
   User.init(
@@ -34,10 +34,10 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Please enter a valid email address, like example@example.com.",
           },
           async isUnique(email) {
-           if(await User.findOne({where:{email}})){
-            throw new Error("Your email was taken by someone.");
-           }
-          }
+            if (await User.findOne({ where: { email } })) {
+              throw new Error("Your email was taken by someone.");
+            }
+          },
         },
       },
       password: {
@@ -80,16 +80,16 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       hooks: {
         beforeCreate(instance, _) {
-          const { HashHelper } = require("../helpers");
+          const { HashHelper, AvatarHelper } = require("../helpers");
           instance.password = HashHelper.generate(instance.dataValues.password);
           instance.role = "General";
         },
-        afterCreate(instance,_){
+        afterCreate(instance, _) {
           sequelize.models.Biodata.create({
-            image: `https://ui-avatars.com/api/?name=${instance.email.split("@")[0]}`,
-            UserId: instance.id
+            image: AvatarHelper.generate(instance.email.split("@")[0]),
+            UserId: instance.id,
           });
-        }
+        },
       },
     },
   );

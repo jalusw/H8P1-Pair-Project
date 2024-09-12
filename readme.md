@@ -59,6 +59,18 @@ npm run start:watch # live reload
 npm run start:debug # with debugging
 ```
 
+Migrate fresh
+
+```bash
+npm run db:migrate:fresh
+```
+
+Format
+
+```bash
+npm run format
+```
+
 ## Folder Structure
 
 Proyek ini menggunakan pola arsitektur MVC dengan struktur folder sebagai
