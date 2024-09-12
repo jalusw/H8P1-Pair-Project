@@ -5,16 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include("../partials/meta.ejs") %>
     <title><%= title %></title>
+    <style>
+      .header .container {
+        padding: 5rem 0;
+      }
+    </style>
   </head>
 
   <body>
-    <div class="container">
-      <h1>Hello world !</h1>
-      <p>Hello There mate !</p>
-      <form action="/logout" method="POST">
-        <button class="btn btn-danger">Logout</button>
-      </form>
-    </div>
+    <%- include("../layouts/navbar.ejs") %>
+    <header class="header">
+      <div class="p-5 text-center rounded-3">
+        <div class="container">
+          <h1 class="text-body-emphasis">Jumbotron with icon</h1>
+          <p class="col-lg-8 mx-auto fs-5 text-muted">
+            This is a custom jumbotron featuring an SVG image at the top, some
+            longer text that wraps early thanks to a responsive
+            <code>.col-*</code> class, and a customized call to action.
+          </p>
+        </div>
+      </div>
+    </header>
+    <main></main>
+    <%- include("../layouts/footer.ejs") %>
     <%- include("../partials/scripts.ejs") %>
   </body>
 </html>

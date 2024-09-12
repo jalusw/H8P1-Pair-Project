@@ -1,6 +1,5 @@
 "use strict";
 const { Model } = require("sequelize");
-const { HashHelper } = require("../helpers");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      this.hasOne(models.Biodata);
+    }
+
+    get isAdmin(){
+      return this.role == 'Admin';
     }
   }
   User.init(
@@ -29,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: {
             msg: "Please enter a valid email address, like example@example.com.",
           },
+          async isUnique(email) {
+           if(await User.findOne({where:{email}})){
+            throw new Error("Your email was taken by someone.");
+           }
+          }
         },
       },
       password: {
@@ -71,9 +80,16 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       hooks: {
         beforeCreate(instance, _) {
+          const { HashHelper } = require("../helpers");
           instance.password = HashHelper.generate(instance.dataValues.password);
           instance.role = "General";
         },
+        afterCreate(instance,_){
+          sequelize.models.Biodata.create({
+            image: `https://ui-avatars.com/api/?name=${instance.email.split("@")[0]}`,
+            UserId: instance.id
+          });
+        }
       },
     },
   );
