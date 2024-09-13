@@ -73,7 +73,7 @@ class CartController {
           id,
         },
       });
-      req.flash("success", "Item deleted from your cart !");
+      req.flash("success", "Item has been deleted !");
       res.redirect("back");
     } catch (error) {
       switch (error.name) {
