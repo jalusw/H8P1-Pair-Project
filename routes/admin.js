@@ -19,15 +19,9 @@ router.use("/", AuthenticationMiddleware.admin);
 router.get("/", DashboardController.index);
 
 // /admin/products
-router.get(
-  "/products",
-  ProductController.index,
-);
+router.get("/products", ProductController.index);
 
-router.get(
-  "/products/add",
-  ProductController.addProduct,
-);
+router.get("/products/add", ProductController.addProduct);
 
 router.post(
   "/products/add",
@@ -35,10 +29,7 @@ router.post(
   ProductController.postProduct,
 );
 
-router.get(
-  "/products/:id/edit",
-  ProductController.getEditProduct,
-);
+router.get("/products/:id/edit", ProductController.getEditProduct);
 
 router.post(
   "/products/:id/edit",
@@ -46,25 +37,13 @@ router.post(
   ProductController.postEditProduct,
 );
 
-router.get(
-  "/products/:id/delete",
-  ProductController.deleteProduct,
-);
+router.get("/products/:id/delete", ProductController.deleteProduct);
 
-router.get(
-  "/products/:id/restock",
-  ProductController.restockProduct,
-);
+router.get("/products/:id/restock", ProductController.restockProduct);
 
-router.get(
-  "/orders",
-  AdminOrderController.index,
-);
+router.get("/orders", AdminOrderController.index);
 
-router.get(
-  "/orders/:id/process",
-  AdminOrderController.process,
-);
+router.get("/orders/:id/process", AdminOrderController.process);
 
 router.get("/transactions", AdminTransactionController.index);
 

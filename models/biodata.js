@@ -39,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         validate: {
           isBefore: {
-            args: "2007-01-01",
-            msg: "Too young !",
+            args: "2008-01-01",
+            msg: "Oops! You need to be at least 16 years old to continue ",
           },
         },
       },

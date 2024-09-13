@@ -33,11 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       return "Unknown";
     }
 
-    get isOnDelivery(){
+    get isOnDelivery() {
       return this.status == "delivered";
     }
 
-    get createdAtInID(){
+    get createdAtInID() {
       const { DateHelper } = require("../helpers");
       return DateHelper.formatToID(this.createdAt);
     }

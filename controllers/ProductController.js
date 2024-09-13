@@ -12,15 +12,15 @@ class ProductController {
     try {
       // do something ...
 
-      const {search = ""} = req.query;
+      const { search = "" } = req.query;
       const data = await Product.findAll({
         include: Category,
         order: [["createdAt", "DESC"]],
         where: {
           name: {
-            [Op.iLike]: `%${search}%`
-          }
-        }
+            [Op.iLike]: `%${search}%`,
+          },
+        },
       });
       return res.render("pages/products", { data, query: req.query });
     } catch (error) {
@@ -86,7 +86,11 @@ class ProductController {
     try {
       let categories = await Category.findAll();
       let product = await Product.findByPk(id);
-      return res.render("pages/editProduct", { product, categories, errors: {} });
+      return res.render("pages/editProduct", {
+        product,
+        categories,
+        errors: {},
+      });
     } catch (error) {
       switch (error.name) {
         default:
@@ -115,7 +119,7 @@ class ProductController {
             title: "Edit Product",
             errors: ValidationErrorHelper.mapErrorByPath(error.errors),
             categories,
-            product
+            product,
           });
         default:
           return ErrorPageHelper.internalServerError(error, res);

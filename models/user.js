@@ -43,7 +43,15 @@ module.exports = (sequelize, DataTypes) => {
           {
             model: sequelize.models.Product,
             through: {
-                attributes: ["id", "quantity", "price", "note", "address","status","createdAt"],
+              attributes: [
+                "id",
+                "quantity",
+                "price",
+                "note",
+                "address",
+                "status",
+                "createdAt",
+              ],
               where: {
                 status: {
                   [Op.in]: ["complete"],
@@ -64,10 +72,18 @@ module.exports = (sequelize, DataTypes) => {
           {
             model: sequelize.models.Product,
             through: {
-                attributes: ["id", "quantity", "price", "note", "address","status","createdAt"],
+              attributes: [
+                "id",
+                "quantity",
+                "price",
+                "note",
+                "address",
+                "status",
+                "createdAt",
+              ],
               where: {
                 status: {
-                  [Op.in]: ["paid","delivered"],
+                  [Op.in]: ["paid", "delivered"],
                 },
               },
             },

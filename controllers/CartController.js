@@ -38,7 +38,7 @@ class CartController {
         where: {
           UserId,
           ProductId: body.ProductId,
-          status: "pending"
+          status: "pending",
         },
         defaults: {
           UserId,
