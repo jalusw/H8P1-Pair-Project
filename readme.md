@@ -8,7 +8,6 @@ Repository ini berisi source code Tugas pair project phase 1 dengan tema e comme
 - Express
 - Sequelize
 - PostgreSQL
-- Nodemailer
 - Multer
 
 ## Installation & Setup
